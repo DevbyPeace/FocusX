@@ -14,6 +14,7 @@ const breakTag = document.querySelector(".break");
 const alarm = new Audio("audio.mp3");
 const pauseTimer = document.getElementById("pausetimer");
 const resumeTimer = document.getElementById("resumetimer");
+const blinker = document.getElementById("middle");
 
 //////// FUNCTIONS
 
@@ -128,26 +129,24 @@ const stopwatch2 = function () {
   let startingTime = 300;
   studyTag.classList.add("hidden");
   breakTag.classList.remove("hidden");
-
+breakTag.textContent = 'Take a Break'
   startTimer.classList.add("hidden");
   const time = setInterval(function () {
     minutes.textContent = String(Math.trunc(startingTime / 60)).padStart(2, 0);
     seconds.textContent = String(Math.trunc(startingTime % 60)).padStart(2, 0);
     if (startingTime === 0) {
+      breakTag.textContent = 'Break'
       minutes.textContent = "00";
       seconds.textContent = "00";
       startTimer.classList.remove("hidden");
       clearInterval(time);
+      clearInterval(blinkist);
       studyTag.classList.remove("hidden");
     }
     // console.log(startingTime);
     startingTime--;
   }, 1000);
 };
-
-// const pauseStopwatch = function () {
-//   clearInterval(timer);
-// };
 
 //////////  EVENT LISTENERS
 darkSwitch.addEventListener("click", switchToDark);
@@ -158,6 +157,8 @@ let interval;
 let startingTime = 0;
 let isPaused = false;
 
+// functions
+
 const stopwatch = function () {
   startingTime =
     Number(prompt("How many minutes would you like to study for?")) * 60;
@@ -165,6 +166,11 @@ const stopwatch = function () {
   pauseTimer.classList.remove("hidden");
   breakTag.classList.add("hidden");
   interval = setInterval(updateTimer, 1000);
+
+  blinkist = setInterval(() => {
+    blinker.style.visibility =
+      blinker.style.visibility === "hidden" ? "visible" : "hidden";
+  }, 950);
 };
 
 const updateTimer = function () {
@@ -189,8 +195,10 @@ const updateTimer = function () {
 // Pause timer
 pauseTimer.addEventListener("click", function () {
   clearInterval(interval);
+  clearInterval(blinkist);
   isPaused = true;
   pauseTimer.classList.add("hidden");
+  blinker.style.visibility === "visible";
   resumeTimer.classList.remove("hidden");
 });
 
@@ -198,6 +206,10 @@ pauseTimer.addEventListener("click", function () {
 resumeTimer.addEventListener("click", function () {
   if (isPaused) {
     interval = setInterval(updateTimer, 1000);
+    blinkist = setInterval(() => {
+      blinker.style.visibility =
+        blinker.style.visibility === "hidden" ? "visible" : "hidden";
+    }, 950);
     isPaused = false;
     resumeTimer.classList.add("hidden");
     pauseTimer.classList.remove("hidden");
