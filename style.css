@@ -149,3 +149,66 @@ section .outerbox .startbtn button:hover {
 .hidden{
   display: none;
 }
+
+
+/* ================= RESPONSIVE DESIGN ================= */
+
+/* Tablets (768px and below) */
+@media screen and (max-width: 768px) {
+  header .nav-buttons {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header .nav-buttons .rowleft {
+    font-size: 28px;
+    margin-bottom: 1rem;
+  }
+
+  section .outerbox {
+    width: 80%;
+    height: 60vh;
+  }
+
+  section .outerbox .clock {
+    font-size: 50px;
+  }
+
+  section .outerbox .startbtn button {
+    width: 7rem;
+    height: 2.8rem;
+    font-size: 16px;
+  }
+}
+
+/* Mobile (480px and below) */
+@media screen and (max-width: 480px) {
+  header {
+    padding: 0.5rem;
+  }
+
+  header .nav-buttons {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header .nav-buttons .rowleft {
+    font-size: 24px;
+  }
+
+  section .outerbox {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  section .outerbox .clock {
+    font-size: 40px;
+    gap: 0.5rem;
+  }
+
+  section .outerbox .startbtn button {
+    width: 6rem;
+    height: 2.5rem;
+    font-size: 14px;
+  }
+}
